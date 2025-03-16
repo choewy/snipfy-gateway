@@ -1,17 +1,25 @@
+import axios from 'axios';
+import { useCallback, useEffect } from 'react';
+
+import { LINK_FORCE_API_URL, LINK_FORCE_WEB_URL } from './persistent/config';
+
 function App() {
-  const handleClickKakaoLogin = () => {
-    const href = window.location.href;
-    const [protocol, url] = href.split('://');
-    const state = `${protocol}://${url.split('/').shift()}/kakao`;
+  const getLinkForceLink = useCallback(async () => {
+    const pathname = window.location.pathname.replace('/', '');
 
-    window.location.href = `http://localhost:4000/auth/kakao?state=${state}`;
-  };
+    const url = await axios
+      .post(`${LINK_FORCE_API_URL}/links/${pathname}/hit`)
+      .then((res) => res.data.url)
+      .catch(() => LINK_FORCE_WEB_URL);
 
-  return (
-    <div>
-      <button onClick={handleClickKakaoLogin}>카카오 로그인</button>
-    </div>
-  );
+    window.location.replace(url);
+  }, []);
+
+  useEffect(() => {
+    getLinkForceLink();
+  }, [getLinkForceLink]);
+
+  return <></>;
 }
 
 export default App;
