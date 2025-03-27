@@ -1,15 +1,20 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { LinkPage } from './pages/Link';
-import { NavigateToWebPage } from './pages/Navigate';
+import { NotFoundPage } from './pages/NotFound';
+import { HitLinkPage } from './pages/HitLink';
+import { NavigateToWebPage } from './pages/NavigateToWeb';
 
 function App() {
   return (
     <RouterProvider
       router={createBrowserRouter([
         {
+          path: '/404',
+          element: <NotFoundPage />,
+        },
+        {
           path: '/:linkId',
-          element: <LinkPage />,
+          element: <HitLinkPage />,
         },
         {
           path: '/',

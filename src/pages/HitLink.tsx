@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router';
 
 import { LinkApi } from '../api/LinkApi';
 
-export function LinkPage() {
+export function HitLinkPage() {
   const naviate = useNavigate();
   const params = useParams<{ linkId: string }>();
 
@@ -19,7 +19,7 @@ export function LinkPage() {
         window.location.href = data.data?.url;
       }
     } catch (e) {
-      return naviate('/', { replace: true });
+      return naviate('/404', { replace: true });
     }
   }, [naviate, params.linkId]);
 
