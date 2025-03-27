@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from "react"
-import { useNavigate } from "react-router"
+import { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 
 export function NotFoundPage() {
   const navigate = useNavigate();
@@ -7,15 +7,15 @@ export function NotFoundPage() {
 
   const decreaseSeconds = useCallback(() => {
     setTimeout(() => {
-      setSeconds(prev => prev - 1);
-    }, 1_000)
+      setSeconds((prev) => prev - 1);
+    }, 1_000);
   }, [setSeconds]);
 
   useEffect(() => {
     decreaseSeconds();
 
     if (seconds < 1) {
-      navigate('/', { replace: true })
+      navigate('/', { replace: true });
     }
   }, [seconds]);
 

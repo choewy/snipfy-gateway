@@ -12,15 +12,15 @@ export function HitLinkPage() {
       return naviate('/', { replace: true });
     }
 
-    try {
-      const { data } = await LinkApi.hit(params.linkId);
+    await LinkApi.hit(params.linkId)
+      .then((response) => {
+        if (!response.data?.data?.url) {
+          throw new Error();
+        }
 
-      if (data.data?.url) {
-        window.location.href = data.data?.url;
-      }
-    } catch (e) {
-      return naviate('/404', { replace: true });
-    }
+        window.location.href = response.data?.data?.url;
+      })
+      .catch(() => naviate('/404', { replace: true }));
   }, [naviate, params.linkId]);
 
   useEffect(() => {
