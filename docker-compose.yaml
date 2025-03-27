@@ -1,0 +1,19 @@
+name: link-force
+
+services:
+  gateway:
+    container_name: link-force-gateway
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3001:3001
+    networks:
+      - link-force
+
+networks:
+  link-force:
+    driver: bridge

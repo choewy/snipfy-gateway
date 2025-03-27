@@ -1,25 +1,23 @@
-import axios from 'axios';
-import { useCallback, useEffect } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { LINK_FORCE_API_URL, LINK_FORCE_WEB_URL } from './persistent/config';
+import { LinkPage } from './pages/Link';
+import { NavigateToWebPage } from './pages/Navigate';
 
 function App() {
-  const getLinkForceLink = useCallback(async () => {
-    const pathname = window.location.pathname.replace('/', '');
-
-    const url = await axios
-      .post(`${LINK_FORCE_API_URL}/links/${pathname}/hit`)
-      .then((res) => res.data.url)
-      .catch(() => LINK_FORCE_WEB_URL);
-
-    window.location.replace(url);
-  }, []);
-
-  useEffect(() => {
-    getLinkForceLink();
-  }, [getLinkForceLink]);
-
-  return <></>;
+  return (
+    <RouterProvider
+      router={createBrowserRouter([
+        {
+          path: '/:linkId',
+          element: <LinkPage />,
+        },
+        {
+          path: '/',
+          element: <NavigateToWebPage />,
+        },
+      ])}
+    />
+  );
 }
 
 export default App;
