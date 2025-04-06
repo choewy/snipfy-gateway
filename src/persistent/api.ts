@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import { LINK_FORCE_API_URL } from './config';
+import { SNIPFY_API_URL } from './config';
 
-const api = axios.create({ baseURL: LINK_FORCE_API_URL });
+const api = axios.create({ baseURL: SNIPFY_API_URL });
 
 export { api };
