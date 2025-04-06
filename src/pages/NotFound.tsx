@@ -17,7 +17,7 @@ export function NotFoundPage() {
     if (seconds < 1) {
       navigate('/', { replace: true });
     }
-  }, [seconds]);
+  }, [seconds, navigate, decreaseSeconds]);
 
   return (
     <div>
